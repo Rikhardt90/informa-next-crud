@@ -1,36 +1,246 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager - Prueba Técnica Next.js
 
-## Getting Started
+Aplicación fullstack CRUD de tareas desarrollada con Next.js, TypeScript y MongoDB.
 
-First, run the development server:
+## 🚀 Cómo ejecutar el proyecto
+
+### Requisitos previos
+
+- Node.js 18+
+- MongoDB instalado y corriendo localmente (o configuración de MongoDB Atlas)
+
+### Instalación
+
+```bash
+npm install
+```
+
+### Configuración
+
+Crear archivo `.env.local` en la raíz del proyecto:
+
+```bash
+MONGODB_URI=mongodb://localhost:27017/tasks
+```
+
+(O usar tu URI de MongoDB Atlas)
+
+### Ejecución
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Otros comandos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build    # Build para producción
+npm run start  # Iniciar servidor de producción
+npm run lint   # Verificar código con ESLint
+npm test      # Ejecutar tests
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 Estructura del proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+next-prueba-informa/
+├── app/
+│   ├── api/
+│   │   └── tasks/
+│   │       ├── route.ts        # GET, POST /api/tasks
+│   │       └── [id]/
+│   │           └── route.ts  # GET, PATCH, DELETE /api/tasks/:id
+│   ├── tasks/
+│   │   ├── page.tsx        # Página /tasks
+│   │   └── [id]/
+│   │       └── page.tsx    # Página /tasks/[id]
+│   ├── layout.tsx
+│   ├── page.tsx            # Landing page /
+│   └── globals.css
+├── components/
+│   └── TasksList.tsx       # Componente de lista de tareas
+├── lib/
+│   ├── mongodb.ts          # Conexión a MongoDB
+│   ├── task.model.ts       # Modelo Mongoose
+│   └── validations.ts      # Funciones de validación
+├── types/
+│   └── task.ts            # Tipos TypeScript
+├── __tests__/
+│   └── validations.test.ts # Tests unitarios
+├── jest.config.ts
+├── package.json
+├── tsconfig.json
+└── next.config.ts
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠 Herramientas y decisiones técnicas
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Framework: Next.js 16.2.3 (App Router)
+
+- Utilization de Route Handlers para API REST
+- Componentes server y client separados
+- Rendering híbrido (static para landing, dynamic para tasks)
+
+### Lenguaje: TypeScript
+
+- Tipado estricto (`strict: true`)
+- Tipos definidos en `/types/task.ts`
+- Interfaces para documentos Mongoose
+
+### Base de datos: MongoDB + Mongoose
+
+- Modelo con esquema definido en `lib/task.model.ts`
+- Connection pooling cacheado en `lib/mongodb.ts`
+- Timestamps automáticos para `createdAt` y `updatedAt`
+
+### Testing: Jest + ts-jest
+
+- Configuración en `jest.config.ts`
+- Tests de validación en `__tests__/validations.test.ts`
+- 12 tests cubriendo validación de entrada
+
+### Estilado: Tailwind CSS 4
+
+- Utility-first approach
+- Diseño responsive mobile-first
+- Sin librerías de componentes adicionales
+
+---
+
+## 📝 API REST
+
+| Método | Endpoint | Descripción |
+|--------|---------|-----------|
+| POST | `/api/tasks` | Crear nueva tarea |
+| GET | `/api/tasks` | Listar todas las tareas |
+| GET | `/api/tasks/:id` | Obtener tarea por ID |
+| PATCH | `/api/tasks/:id` | Actualizar estado |
+| DELETE | `/api/tasks/:id` | Eliminar tarea |
+
+###Body para crear/actualizar tarea
+
+```json
+{
+  "titulo": "string (obligatorio, máx 100 chars)",
+  "descripcion": "string (opcional, máx 500 chars)",
+  "estado": "PENDIENTE | COMPLETADA"
+}
+```
+
+### Códigos de respuesta
+
+- `200` - Éxito
+- `201` - Creado
+- `400` - Error de validación
+- `404` - No encontrado
+- `500` - Error del servidor
+
+---
+
+## 🎯 Modelo de datos (Task)
+
+| Campo | Tipo | Requerido | Descripción |
+|-------|------|----------|-----------|
+| `_id` | ObjectId | Sí | ID único (MongoDB) |
+| `titulo` | string | Sí | Título de la tarea |
+| `descripcion` | string | No | Descripción opcional |
+| `estado` | string | Sí | PENDIENTE o COMPLETADA |
+| `createdAt` | Date | Sí | Fecha de creación |
+| `updatedAt` | Date | Sí | Fecha de actualización |
+
+---
+
+## ✅ Validaciones implementadas
+
+- Título obligatorio (no vacío, no solo espacios)
+- Título máximo 100 caracteres
+- Descripción máximo 500 caracteres
+- Estado debe ser PENDIENTE o COMPLETADA
+
+---
+
+## 🧪 Tests
+
+Ejecutar todos los tests:
+
+```bash
+npm test
+```
+
+Ejecutar un archivo específico:
+
+```bash
+npm test -- __tests__/validations.test.ts
+```
+
+Ejecutar en modo watch:
+
+```bash
+npm test -- --watch
+```
+
+---
+
+## 📦 Dependencias
+
+### Producción
+
+- `next` (16.2.3) - Framework
+- `react` (19.2.4) - UI
+- `mongoose` (9.4.1) - MongoDB ODM
+
+### Desarrollo
+
+- `typescript` (5)
+- `tailwindcss` (4)
+- `eslint` (9)
+- `jest` - Testing
+- `ts-jest` - TypeScript para Jest
+
+---
+
+## 🎨 Páginas
+
+### `/` - Landing
+
+Página de inicio simple con enlace a /tasks.
+
+### `/tasks` - Lista de tareas
+
+- Formulario para crear tareas
+- Lista de todas las tareas
+- Botón para marcar como completada/pendiente
+- Enlace al detalle de cada tarea
+- Botón para eliminar tarea
+- Estados de carga y error
+
+### `/tasks/[id]` - Detalle de tarea
+
+- Muestra título, descripción y estado
+- Fechas de creación y actualización
+- Botón para cambiar estado
+- Botón para eliminar tarea
+- Manejo de errores (404 si no existe)
+
+---
+
+## 🔧 Decisiones de diseño
+
+1. **UI simple sin librerías**: Solo Tailwind CSS para mantener el proyecto ligero
+2. **Validación en backend**: Siempre validar en el servidor aunque el frontend también valide
+3. **TypeScript estricto**: Sin `any` para mejor mantenibilidad
+4. **Code splitting**: Componentes client para interactividad
+5. **Mongoose cache**: Evita reconnections innecesarias
+
+---
+
+## 📄 Licencia
+
+MIT
