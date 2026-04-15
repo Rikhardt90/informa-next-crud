@@ -2,7 +2,7 @@
 
 Aplicación fullstack CRUD de tareas desarrollada con Next.js, TypeScript y MongoDB.
 
-## 🚀 Cómo ejecutar el proyecto
+## Cómo ejecutar el proyecto
 
 ### Requisitos previos
 
@@ -35,7 +35,7 @@ npm test      # Ejecutar tests
 
 ---
 
-## 📋 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 next-prueba-informa/
