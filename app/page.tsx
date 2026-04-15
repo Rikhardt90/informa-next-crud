@@ -7,6 +7,9 @@ export default function Home() {
         <h1 className="mb-4 text-4xl font-bold text-zinc-900" >
           Task Manager
         </h1>
+        <h2 className="mb-2 text-2xl font-semibold text-zinc-700">
+          Prueba técnica para INFORMA D&B - Ricardo Mera Ciudad
+        </h2>
         <p className="mb-8 text-lg text-zinc-600">
           Aplicación CRUD de tareas con Next.js, TypeScript y MongoDB
         </p>

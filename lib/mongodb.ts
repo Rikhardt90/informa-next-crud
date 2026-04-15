@@ -7,6 +7,7 @@ interface MongooseCache {
   promise: Promise<typeof mongoose> | null;
 }
 
+
 const globalForMongoose = globalThis as unknown as { mongoose?: MongooseCache };
 
 const cached: MongooseCache = globalForMongoose.mongoose || { conn: null, promise: null };
