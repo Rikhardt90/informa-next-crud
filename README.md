@@ -70,7 +70,7 @@ next-prueba-informa/
 
 ---
 
-## 🛠 Herramientas y decisiones técnicas
+## Herramientas y decisiones técnicas
 
 ### Framework: Next.js 16.2.3 (App Router)
 
@@ -101,6 +101,11 @@ next-prueba-informa/
 - Utility-first approach
 - Diseño responsive mobile-first
 - Sin librerías de componentes adicionales
+
+### IA 
+
+- Opencode / Qwen3.5
+- LLM local (Ollama)
 
 ---
 
