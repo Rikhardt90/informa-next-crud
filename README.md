@@ -15,23 +15,13 @@ Aplicación fullstack CRUD de tareas desarrollada con Next.js, TypeScript y Mong
 npm install
 ```
 
-### Configuración
-
-Crear archivo `.env.local` en la raíz del proyecto:
-
-```bash
-MONGODB_URI=mongodb://localhost:27017/tasks
-```
-
-(O usar tu URI de MongoDB Atlas)
-
 ### Ejecución
 
 ```bash
 npm run dev
 ```
 
-Abrir [http://localhost:3000](http://localhost:3000)
+Abrir [http://localhost:3000]
 
 ### Otros comandos
 
@@ -114,7 +104,7 @@ next-prueba-informa/
 
 ---
 
-## 📝 API REST
+## API REST
 
 | Método | Endpoint | Descripción |
 |--------|---------|-----------|
@@ -144,7 +134,7 @@ next-prueba-informa/
 
 ---
 
-## 🎯 Modelo de datos (Task)
+## Modelo de datos (Task)
 
 | Campo | Tipo | Requerido | Descripción |
 |-------|------|----------|-----------|
@@ -157,7 +147,7 @@ next-prueba-informa/
 
 ---
 
-## ✅ Validaciones implementadas
+## Validaciones implementadas
 
 - Título obligatorio (no vacío, no solo espacios)
 - Título máximo 100 caracteres
@@ -166,7 +156,7 @@ next-prueba-informa/
 
 ---
 
-## 🧪 Tests
+## Tests
 
 Ejecutar todos los tests:
 
@@ -188,7 +178,7 @@ npm test -- --watch
 
 ---
 
-## 📦 Dependencias
+## Dependencias
 
 ### Producción
 
@@ -206,7 +196,7 @@ npm test -- --watch
 
 ---
 
-## 🎨 Páginas
+## Páginas
 
 ### `/` - Landing
 
@@ -231,7 +221,7 @@ Página de inicio simple con enlace a /tasks.
 
 ---
 
-## 🔧 Decisiones de diseño
+## Decisiones de diseño
 
 1. **UI simple sin librerías**: Solo Tailwind CSS para mantener el proyecto ligero
 2. **Validación en backend**: Siempre validar en el servidor aunque el frontend también valide
@@ -240,7 +230,3 @@ Página de inicio simple con enlace a /tasks.
 5. **Mongoose cache**: Evita reconnections innecesarias
 
 ---
-
-## 📄 Licencia
-
-MIT

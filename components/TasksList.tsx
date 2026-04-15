@@ -161,19 +161,13 @@ export default function TasksList() {
                   <p className="mt-1 text-sm text-zinc-600">{task.descripcion}</p>
                 )}
               </div>
-              <div className="ml-4 flex gap-2">
+              <div className="hidden md:flex ml-4 gap-2">
                 <button
                   onClick={() => toggleComplete(task._id, task.estado)}
                   className="rounded px-3 py-1 text-sm text-zinc-600 hover:bg-zinc-100"
                 >
                   {task.estado === 'PENDIENTE' ? 'Completar' : 'Pendiente'}
                 </button>
-                <Link
-                  href={`/tasks/${task._id}`}
-                  className="rounded px-3 py-1 text-sm text-secondary hover:bg-blue-50"
-                >
-                  Ver
-                </Link>
                 <button
                   onClick={() => deleteTask(task._id)}
                   className="rounded px-3 py-1 text-sm text-accent hover:bg-red-50"
@@ -181,6 +175,12 @@ export default function TasksList() {
                   Eliminar
                 </button>
               </div>
+              <Link
+                href={`/tasks/${task._id}`}
+                className="rounded px-3 py-1 text-sm text-secondary hover:bg-blue-50"
+              >
+                Ver
+              </Link>
             </li>
           ))}
         </ul>
