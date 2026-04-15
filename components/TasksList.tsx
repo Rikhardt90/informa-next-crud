@@ -104,7 +104,8 @@ export default function TasksList() {
             placeholder="Título de la tarea"
             value={newTask.titulo}
             onChange={(e) => setNewTask({ ...newTask, titulo: e.target.value })}
-            className="w-full rounded border border-zinc-300 px-3 py-2 focus:border-secondary focus:outline-none text-black"
+            
+            className="w-full rounded border border-zinc-300 px-3 py-2 focus:border-secondary focus:outline-none  text-black"
           />
         </div>
         <div className="mb-4">
